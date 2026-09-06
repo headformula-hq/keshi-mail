@@ -10,7 +10,7 @@ Zero dipendenze. Node ≥ 20. ESM.
 ## Cosa contiene
 
 - `keshi-mail` (server-safe)
-  - `emailKeshi(opts, brand?)` → HTML completo dell'email (card 600px, logo
+  - `emailKeshi(opts, brand?)` → HTML completo dell'email (sfondo bianco, nessuna card, colonna a tutta larghezza fino a 640px, logo
     Keshi come immagine, eyebrow, titolo, paragrafi, blocco codice, dati chiave,
     bottone, nota, piè di pagina legale). CSS responsive sotto i 620px, tema
     chiaro fisso.

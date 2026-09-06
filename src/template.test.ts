@@ -27,9 +27,10 @@ test("documento completo: doctype, lang it, color-scheme light, CSS responsive, 
   expect(html).toContain('<meta name="color-scheme" content="light">');
   expect(html).toContain("@media only screen and (max-width:620px)");
   expect(html).toContain(".k-code{font-size:36px!important;letter-spacing:.16em!important}");
-  expect(html).toContain('background-color:#e9eaed;');
-  expect(html).toContain("max-width:600px");
-  expect(html).toContain("border-radius:18px");
+  expect(html).toContain('background-color:#ffffff;');
+  expect(html).not.toContain('#e9eaed');
+  expect(html).toContain("max-width:640px");
+  expect(html).not.toMatch(/class="k-card"[^>]*border-radius/);
 });
 
 test("variante cliente: padding 40/48, titolo 32px peso 300, eyebrow in blu, senza pillola", () => {

@@ -14,7 +14,7 @@ const MUTED = "#757c86";
 const BODY = "#4b5158";
 const LINE = "#e6e9ed";
 const PANEL = "#f2f3f5";
-const BG = "#e9eaed";
+const BG = "#ffffff"; // sfondo pagina bianco: nessuna card, contenuto a tutta larghezza (decisione di Luca, 6 set 2026)
 
 export type EmailKeshiOpts = {
   eyebrow?: string;
@@ -77,10 +77,10 @@ ${o.code.hint ? `<p style="margin:12px 0 0;font-size:13px;color:${MUTED};">${esc
   const footer = o.footer ?? (interna ? "Notifica interna Keshi." : "Comunicazione automatica relativa alla tua offerta.");
 
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
-<style>@media only screen and (max-width:620px){.k-wrap{padding:16px 10px!important}.k-card{width:100%!important;border-radius:14px!important}.k-pad{padding-left:24px!important;padding-right:24px!important}.k-h1{font-size:27px!important}.k-code{font-size:36px!important;letter-spacing:.16em!important}}</style></head>
+<style>@media only screen and (max-width:620px){.k-wrap{padding:8px 0!important}.k-pad{padding-left:24px!important;padding-right:24px!important}.k-h1{font-size:27px!important}.k-code{font-size:36px!important;letter-spacing:.16em!important}}</style></head>
 <body style="margin:0;padding:0;background-color:${BG};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${BG};"><tr><td align="center" class="k-wrap" style="padding:32px 20px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="k-card" style="width:100%;max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:18px;font-family:${SANS};color:${INK};">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${BG};"><tr><td align="center" class="k-wrap" style="padding:16px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="k-card" style="width:100%;max-width:640px;margin:0 auto;background-color:${BG};font-family:${SANS};color:${INK};">
 <tr><td class="k-pad" style="padding:${interna ? 32 : 40}px 48px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
 <td style="vertical-align:middle;"><img src="${escapeHtml(b.logoUrl)}" alt="${escapeHtml(b.logoAlt)}" height="20" style="height:20px;width:auto;display:block;border:0;"></td>${tag}</tr></table></td></tr>
 <tr><td class="k-pad" style="padding:${interna ? 28 : 40}px 48px 40px;">${eyebrow}<h1 class="k-h1" style="margin:0 0 20px;font-size:${interna ? 24 : 32}px;line-height:1.12;letter-spacing:-.02em;font-weight:300;color:${INK};">${escapeHtml(o.heading)}</h1>${body}${code}${facts}${cta}${nota}</td></tr>
