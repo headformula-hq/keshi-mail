@@ -11,7 +11,6 @@ export function otpSupabaseTemplate(brand?: Partial<KeshiMailBrand>): { subject:
     subject: `Il tuo codice per entrare in ${prodotto}`,
     html: emailKeshi(
       {
-        eyebrow: "Accesso",
         heading: "Il tuo codice per entrare",
         intro: `Inseriscilo nella pagina di accesso di ${prodotto}. Vale dieci minuti e si usa una volta sola.`,
         code: { value: "{{ .Token }}", hint: "Scade tra 10 minuti" },

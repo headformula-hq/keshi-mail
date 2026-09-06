@@ -1,6 +1,6 @@
 {
   "name": "keshi-mail",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "license": "MIT",
   "description": "Layout email condiviso delle app Keshi: template HTML, OTP Supabase, invio via Resend",

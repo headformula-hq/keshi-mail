@@ -10,7 +10,6 @@ test("il segnaposto {{ .Token }} resta intatto nel blocco codice", () => {
 test("subject e contenuti dell'email OTP di riferimento", () => {
   const { subject, html } = otpSupabaseTemplate();
   expect(subject).toBe("Il tuo codice per entrare in Keshi");
-  expect(html).toContain(">Accesso</div>");
   expect(html).toContain(">Il tuo codice per entrare</h1>");
   expect(html).toContain("Inseriscilo nella pagina di accesso di Keshi. Vale dieci minuti e si usa una volta sola.");
   expect(html).toContain(">Scade tra 10 minuti</p>");
@@ -19,9 +18,9 @@ test("subject e contenuti dell'email OTP di riferimento", () => {
   expect(html).toContain("Keshi è un marchio di Headformula S.r.l., P.IVA 14573160968");
 });
 
-test("l'accento dell'eyebrow è il blu di default", () => {
+test("nessun eyebrow 'Accesso' sopra il titolo, nessun oro", () => {
   const { html } = otpSupabaseTemplate();
-  expect(html).toContain("color:#2f6fcb;margin-bottom:14px;\">Accesso</div>");
+  expect(html).not.toContain(">Accesso<");
   expect(html).not.toContain("#c8922e");
 });
 

@@ -33,12 +33,12 @@ test("documento completo: doctype, lang it, color-scheme light, CSS responsive, 
   expect(html).not.toMatch(/class="k-card"[^>]*border-radius/);
 });
 
-test("variante cliente: padding 40/48, titolo 32px peso 100, eyebrow in blu, senza pillola", () => {
-  const html = emailKeshi({ ...base, eyebrow: "Accesso" });
+test("variante cliente: padding 40/48, titolo 32px peso 100, nessun eyebrow, senza pillola", () => {
+  const html = emailKeshi(base);
   expect(html).toContain('style="padding:40px 48px 0;"');
-  expect(html).toContain('style="padding:40px 48px 40px;"');
+  // 40px di design + i 28px che occupava l'eyebrow: la distanza logo → titolo non cambia.
+  expect(html).toContain('style="padding:68px 48px 40px;"');
   expect(html).toContain("font-size:32px;line-height:1.12;letter-spacing:-.02em;font-weight:100;");
-  expect(html).toContain("text-transform:uppercase;color:#2f6fcb;margin-bottom:14px;\">Accesso</div>");
   expect(html).not.toContain(">Interna</span>");
   expect(html).toContain("Comunicazione automatica relativa alla tua offerta.");
 });
@@ -94,8 +94,7 @@ test("facts vuoto non rende il pannello", () => {
 });
 
 test("l'oro resta disponibile passando brand.accent", () => {
-  const html = emailKeshi({ ...base, eyebrow: "Proposta", facts: [{ label: "A", value: "B", accent: true }] }, { accent: "#c8922e" });
-  expect(html).toContain("color:#c8922e;margin-bottom:14px;\">Proposta</div>");
+  const html = emailKeshi({ ...base, facts: [{ label: "A", value: "B", accent: true }] }, { accent: "#c8922e" });
   expect(html).toContain('color:#c8922e;border-bottom:1px solid transparent;">B</td>');
   expect(html).not.toContain("#2f6fcb");
 });
@@ -110,9 +109,8 @@ test("CTA a pillola con href e label escapati", () => {
   expect(html).toContain("font-size:15px;font-weight:500;color:#ffffff;text-decoration:none;\">Apri &lt;ora&gt;</a>");
 });
 
-test("escapa heading, intro, paragrafi, facts, code, nota, footer, eyebrow", () => {
+test("escapa heading, intro, paragrafi, facts, code, nota, footer", () => {
   const html = emailKeshi({
-    eyebrow: "<e>",
     heading: "<b>x</b>",
     intro: "a & b",
     paragraphs: ["c > d"],
@@ -121,7 +119,6 @@ test("escapa heading, intro, paragrafi, facts, code, nota, footer, eyebrow", () 
     nota: "<n>",
     footer: "<f>",
   });
-  expect(html).toContain("&lt;e&gt;");
   expect(html).toContain("&lt;b&gt;x&lt;/b&gt;");
   expect(html).toContain("a &amp; b");
   expect(html).toContain("c &gt; d");
@@ -132,16 +129,14 @@ test("escapa heading, intro, paragrafi, facts, code, nota, footer, eyebrow", () 
   expect(html).toContain("&lt;n&gt;");
   expect(html).toContain("&lt;f&gt;");
   expect(html).not.toContain("<b>x</b>");
-  expect(html).not.toContain("<e>");
 });
 
-test("variante interna: pillola, padding 32/28, titolo 24px, eyebrow muted, footer interno", () => {
-  const html = emailKeshi({ ...base, eyebrow: "Notifica interna", variant: "interna" });
+test("variante interna: pillola, padding 32/56, titolo 24px, nessun eyebrow, footer interno", () => {
+  const html = emailKeshi({ ...base, variant: "interna" });
   expect(html).toContain('<span style="display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#757c86;border:1px solid #e6e9ed;border-radius:999px;padding:5px 10px;">Interna</span>');
   expect(html).toContain('style="padding:32px 48px 0;"');
-  expect(html).toContain('style="padding:28px 48px 40px;"');
+  expect(html).toContain('style="padding:56px 48px 40px;"');
   expect(html).toContain("font-size:24px;line-height:1.12;");
-  expect(html).toContain("text-transform:uppercase;color:#757c86;margin-bottom:14px;\">Notifica interna</div>");
   expect(html).toContain("Notifica interna Keshi.");
   expect(html).not.toContain("#2f6fcb");
 });
@@ -215,3 +210,11 @@ test("pesi: titolo Thin 100 e paragrafi Light 300 di default, sovrascrivibili da
   expect(pesante).toMatch(/<p style="[^"]*font-weight:400;/);
 });
 
+
+test("nessun eyebrow sopra il titolo: l'h1 apre subito la cella del corpo", () => {
+  const html = emailKeshi(base);
+  expect(html).toContain('style="padding:68px 48px 40px;"><h1');
+  expect(html).not.toContain("margin-bottom:14px;");
+  // @ts-expect-error l'opzione non esiste più: chi la passa se ne accorge al typecheck
+  expect(emailKeshi({ ...base, eyebrow: "Accesso" })).not.toContain("Accesso");
+});

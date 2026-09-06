@@ -18,7 +18,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "01 · Codice di accesso",
     subject: "Il tuo codice per entrare in Keshi",
     opts: {
-      eyebrow: "Accesso",
       heading: "Il tuo codice per entrare",
       intro: "Inseriscilo nella pagina di accesso di Keshi. Vale dieci minuti e si usa una volta sola.",
       code: { value: "482913", hint: "Scade tra 10 minuti" },
@@ -31,7 +30,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "02 · Invito",
     subject: "Crea il tuo profilo Keshi · Gioielleria Rossi",
     opts: {
-      eyebrow: "Benvenuto",
       heading: "Ciao Marco, sei tra i primi di Gioielleria Rossi su Keshi",
       intro: "Un minuto, con Francesco al telefono: crei il profilo, confermi i dati della gioielleria e rispondi a poche domande.",
       cta: { label: "Crea il profilo", href: `${APP}/invito/esempio` },
@@ -43,7 +41,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "03 · Profilo creato",
     subject: "Il tuo profilo Keshi è pronto",
     opts: {
-      eyebrow: "Profilo creato",
       heading: "Sei dentro, Marco.",
       intro: "Il tuo profilo è collegato a Gioielleria Rossi. Ti avvisiamo via email e SMS appena la proposta è pronta.",
       cta: { label: "Vai al tuo profilo", href: `${APP}/app` },
@@ -55,7 +52,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "04 · Proposta pronta",
     subject: "La tua proposta Keshi · Gioielleria Rossi",
     opts: {
-      eyebrow: "La tua proposta",
       heading: "Una proposta per Gioielleria Rossi",
       intro: "Ciao Marco, ecco l'offerta di cui abbiamo parlato.",
       facts: [
@@ -74,7 +70,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "05 · Firma richiesta",
     subject: "Contratto Keshi da firmare · Gioielleria Rossi",
     opts: {
-      eyebrow: "Firma richiesta",
       heading: "Anna, c'è un contratto da firmare per Gioielleria Rossi",
       intro: "Un collega ha completato la proposta Keshi e ti ha indicato come firmataria. La firma richiede un codice via SMS.",
       cta: { label: "Firma il contratto", href: `${APP}/firma/esempio` },
@@ -86,7 +81,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "06 · Firma ricevuta",
     subject: "Firma ricevuta · offerta K-2026-014",
     opts: {
-      eyebrow: "Firma ricevuta",
       heading: "Grazie, Marco",
       intro: "Abbiamo registrato la tua firma. Manca solo la controfirma di Headformula: di norma entro un giorno lavorativo.",
       facts: [
@@ -102,7 +96,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     titolo: "07 · Contratto firmato",
     subject: "Benvenuto in Keshi · contratto firmato",
     opts: {
-      eyebrow: "Contratto firmato",
       heading: "Benvenuto in Keshi, Marco",
       intro: "Il contratto è firmato da entrambe le parti. In allegato la copia firmata e l'audit trail.",
       facts: [
@@ -120,7 +113,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     subject: "Controfirma richiesta · K-2026-014 · Gioielleria Rossi",
     opts: {
       variant: "interna",
-      eyebrow: "Notifica interna",
       heading: "Controfirma richiesta",
       intro: "Gioielleria Rossi ha firmato l'offerta K-2026-014 (Mensile, 1.200 € + IVA).",
       paragraphs: ["Apri il link per rivedere e controfirmare. Il link è personale."],
@@ -133,7 +125,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     subject: "Offerta scaduta · K-2026-014 · Gioielleria Rossi",
     opts: {
       variant: "interna",
-      eyebrow: "Notifica interna",
       heading: "Offerta scaduta",
       intro: "L'offerta K-2026-014 per Gioielleria Rossi è scaduta il 20 settembre 2026 senza firma.",
       paragraphs: ["Dall'admin puoi rigenerarla con un nuovo numero e la stessa configurazione."],
@@ -146,7 +137,6 @@ export const TEMPLATE_ESEMPIO: TemplateEsempio[] = [
     subject: "Correzione richiesta · K-2026-014 · Gioielleria Rossi",
     opts: {
       variant: "interna",
-      eyebrow: "Notifica interna",
       heading: "Correzione richiesta",
       intro: "Gioielleria Rossi (offerta K-2026-014) segnala una correzione ai dati caricati.",
       paragraphs: ["La partita IVA riportata è quella vecchia: la nuova è IT01234567890."],

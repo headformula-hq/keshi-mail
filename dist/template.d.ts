@@ -1,7 +1,6 @@
 import { type KeshiMailBrand } from "./brand.js";
 export { DEFAULT_BRAND, type KeshiMailBrand } from "./brand.js";
 export type EmailKeshiOpts = {
-    eyebrow?: string;
     heading: string;
     intro: string;
     paragraphs?: string[];

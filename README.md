@@ -11,7 +11,7 @@ Zero dipendenze. Node ≥ 20. ESM.
 
 - `keshi-mail` (server-safe)
   - `emailKeshi(opts, brand?)` → HTML completo dell'email (sfondo bianco, nessuna card, colonna a tutta larghezza fino a 640px, logo
-    Keshi come immagine, eyebrow, titolo, paragrafi, blocco codice, dati chiave,
+    Keshi come immagine, titolo, paragrafi, blocco codice, dati chiave,
     bottone, nota, piè di pagina legale). CSS responsive sotto i 620px, tema
     chiaro fisso.
   - `otpSupabaseTemplate(brand?)` → `{ subject, html }` del codice di accesso
@@ -39,7 +39,7 @@ npm i keshi-mail@github:headformula-hq/keshi-mail#v0.1.0
 ```ts
 import { emailKeshi, sendEmail } from "keshi-mail";
 
-const html = emailKeshi({ eyebrow: "Benvenuto", heading: "Sei dentro, Marco.", intro: "Il tuo profilo è pronto.", cta: { label: "Vai al profilo", href: url } });
+const html = emailKeshi({ heading: "Sei dentro, Marco.", intro: "Il tuo profilo è pronto.", cta: { label: "Vai al profilo", href: url } });
 await sendEmail({ to: "marco@esempio.it", subject: "Il tuo profilo Keshi è pronto", html });
 ```
 
@@ -54,7 +54,6 @@ EMAIL_FROM="keshi <noreply@keshilabs.com>"  # facoltativa, questo è il default
 
 ```ts
 type EmailKeshiOpts = {
-  eyebrow?: string;                 // riga piccola maiuscola sopra il titolo, nel colore d'accento
   heading: string;                  // titolo (32px, peso 300; 24px nelle interne)
   intro: string;                    // primo paragrafo
   paragraphs?: string[];            // altri paragrafi
@@ -63,7 +62,7 @@ type EmailKeshiOpts = {
   cta?: { label: string; href: string };                        // bottone a pillola
   nota?: string;                    // testo piccolo con bordo superiore
   footer?: string;                  // riga di contesto sotto la riga legale
-  variant?: "cliente" | "interna";  // "interna": pillola Interna, misure ridotte, eyebrow muted
+  variant?: "cliente" | "interna";  // "interna": pillola Interna, misure ridotte
 };
 ```
 
@@ -131,7 +130,7 @@ type KeshiMailBrand = {
 
 ```ts
 emailKeshi(opts, { product: "keshi catalog" });          // eyebrow del prodotto accanto al logo
-emailKeshi(opts, { accent: "#c8922e" });                 // eyebrow e valori in evidenza in oro
+emailKeshi(opts, { accent: "#c8922e" });                 // valori in evidenza in oro
 otpSupabaseTemplate({ product: "keshi catalog" });       // subject "Il tuo codice per entrare in keshi catalog"
 ```
 
