@@ -33,11 +33,11 @@ test("documento completo: doctype, lang it, color-scheme light, CSS responsive, 
   expect(html).not.toMatch(/class="k-card"[^>]*border-radius/);
 });
 
-test("variante cliente: padding 40/48, titolo 32px peso 300, eyebrow in blu, senza pillola", () => {
+test("variante cliente: padding 40/48, titolo 32px peso 100, eyebrow in blu, senza pillola", () => {
   const html = emailKeshi({ ...base, eyebrow: "Accesso" });
   expect(html).toContain('style="padding:40px 48px 0;"');
   expect(html).toContain('style="padding:40px 48px 40px;"');
-  expect(html).toContain("font-size:32px;line-height:1.12;letter-spacing:-.02em;font-weight:300;");
+  expect(html).toContain("font-size:32px;line-height:1.12;letter-spacing:-.02em;font-weight:100;");
   expect(html).toContain("text-transform:uppercase;color:#2f6fcb;margin-bottom:14px;\">Accesso</div>");
   expect(html).not.toContain(">Interna</span>");
   expect(html).toContain("Comunicazione automatica relativa alla tua offerta.");
@@ -197,10 +197,21 @@ test("fontFace: senza fontBaseUrl non dichiara nessun @font-face", () => {
 
 test("fontFace: con fontBaseUrl dichiara i quattro pesi di Creato Display senza doppio slash", () => {
   const css = fontFace("https://esempio.app/fonts/");
-  expect(css.match(/@font-face/g)).toHaveLength(4);
+  expect(css.match(/@font-face/g)).toHaveLength(5);
   expect(css).toContain("url('https://esempio.app/fonts/CreatoDisplay-Light.otf') format('opentype');font-weight:300");
   expect(css).toContain("font-weight:700");
+  expect(css).toContain("CreatoDisplay-Thin.otf') format('opentype');font-weight:100");
   expect(css).not.toContain("fonts//");
   const html = emailKeshi({ heading: "T", intro: "i" }, { fontBaseUrl: "https://esempio.app/fonts" });
   expect(html.indexOf("@font-face")).toBeLessThan(html.indexOf("@media only screen"));
 });
+
+test("pesi: titolo Thin 100 e paragrafi Light 300 di default, sovrascrivibili dal brand", () => {
+  const html = emailKeshi({ heading: "T", intro: "i" });
+  expect(html).toMatch(/<h1[^>]*font-weight:100;/);
+  expect(html).toMatch(/<p style="margin:0 0 16px;font-size:16px;line-height:1.6;font-weight:300;/);
+  const pesante = emailKeshi({ heading: "T", intro: "i" }, { headingWeight: 300, bodyWeight: 400 });
+  expect(pesante).toMatch(/<h1[^>]*font-weight:300;/);
+  expect(pesante).toMatch(/<p style="[^"]*font-weight:400;/);
+});
+

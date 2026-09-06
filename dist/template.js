@@ -12,7 +12,7 @@ const BODY = "#4b5158";
 const LINE = "#e6e9ed";
 const PANEL = "#f2f3f5";
 const BG = "#ffffff"; // sfondo pagina bianco: nessuna card, contenuto a tutta larghezza (decisione di Luca, 6 set 2026)
-const FONT_FILES = [["CreatoDisplay-Light.otf", 300], ["CreatoDisplay-Regular.otf", 400], ["CreatoDisplay-Medium.otf", 500], ["CreatoDisplay-Bold.otf", 700]];
+const FONT_FILES = [["CreatoDisplay-Thin.otf", 100], ["CreatoDisplay-Light.otf", 300], ["CreatoDisplay-Regular.otf", 400], ["CreatoDisplay-Medium.otf", 500], ["CreatoDisplay-Bold.otf", 700]];
 /** Dichiarazioni @font-face per Creato Display, solo se il brand indica dove sono i file (https). */
 export function fontFace(baseUrl) {
     if (!baseUrl || !/^https?:\/\//.test(baseUrl))
@@ -24,7 +24,7 @@ export function fontFace(baseUrl) {
 export function emailKeshi(o, brand) {
     const b = risolviBrand(brand);
     const interna = o.variant === "interna";
-    const p = (t) => `<p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:${BODY};">${escapeHtml(t)}</p>`;
+    const p = (t) => `<p style="margin:0 0 16px;font-size:16px;line-height:1.6;font-weight:${b.bodyWeight ?? 300};color:${BODY};">${escapeHtml(t)}</p>`;
     const body = [o.intro, ...(o.paragraphs ?? [])].map(p).join("");
     const eyebrow = o.eyebrow
         ? `<div style="font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:${interna ? MUTED : b.accent};margin-bottom:14px;">${escapeHtml(o.eyebrow)}</div>`
@@ -67,7 +67,7 @@ ${fontFace(b.fontBaseUrl)}<style>@media only screen and (max-width:620px){.k-wra
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="k-card" style="width:100%;max-width:640px;margin:0 auto;background-color:${BG};font-family:${SANS};color:${INK};">
 <tr><td class="k-pad" style="padding:${interna ? 32 : 40}px 48px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
 <td style="vertical-align:middle;"><img src="${escapeHtml(b.logoUrl)}" alt="${escapeHtml(b.logoAlt)}" height="20" style="height:20px;width:auto;display:block;border:0;"></td>${tag}</tr></table></td></tr>
-<tr><td class="k-pad" style="padding:${interna ? 28 : 40}px 48px 40px;">${eyebrow}<h1 class="k-h1" style="margin:0 0 20px;font-size:${interna ? 24 : 32}px;line-height:1.12;letter-spacing:-.02em;font-weight:300;color:${INK};">${escapeHtml(o.heading)}</h1>${body}${code}${facts}${cta}${nota}</td></tr>
+<tr><td class="k-pad" style="padding:${interna ? 28 : 40}px 48px 40px;">${eyebrow}<h1 class="k-h1" style="margin:0 0 20px;font-size:${interna ? 24 : 32}px;line-height:1.12;letter-spacing:-.02em;font-weight:${b.headingWeight ?? 100};color:${INK};">${escapeHtml(o.heading)}</h1>${body}${code}${facts}${cta}${nota}</td></tr>
 <tr><td class="k-pad" style="padding:0 48px 36px;"><div style="height:1px;background:${LINE};margin-bottom:20px;"></div>
 <p style="margin:0;font-size:12px;line-height:1.6;color:${MUTED};">${escapeHtml(b.legalLine)}</p>
 <p style="margin:8px 0 0;font-size:11px;line-height:1.6;color:#9aa1ab;">${escapeHtml(footer)}</p></td></tr>

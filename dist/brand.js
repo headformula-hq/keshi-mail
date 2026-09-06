@@ -7,6 +7,8 @@ export const DEFAULT_BRAND = {
     logoAlt: "Keshi",
     legalLine: "Keshi è un marchio di Headformula S.r.l., P.IVA 14573160968 · Via Morimondo 26, 20143 Milano (MI)",
     accent: "#2f6fcb",
+    headingWeight: 100,
+    bodyWeight: 300,
 };
 export function risolviBrand(brand) {
     return { ...DEFAULT_BRAND, ...(brand ?? {}) };
