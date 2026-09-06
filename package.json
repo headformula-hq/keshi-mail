@@ -1,0 +1,39 @@
+{
+  "name": "keshi-mail",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Layout email condiviso delle app Keshi: template HTML, OTP Supabase, invio via Resend",
+  "repository": "github:headformula-hq/keshi-mail",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "keshi-mail": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./supabase": {
+      "types": "./dist/supabase.d.ts",
+      "default": "./dist/supabase.js"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc -p tsconfig.build.json && chmod +x dist/cli.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "release": "npm test && npm run typecheck && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5",
+    "vitest": "^4.1.9"
+  }
+}
