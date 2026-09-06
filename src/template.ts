@@ -29,6 +29,16 @@ export type EmailKeshiOpts = {
   variant?: "cliente" | "interna";
 };
 
+
+const FONT_FILES: Array<[string, number]> = [["CreatoDisplay-Light.otf", 300], ["CreatoDisplay-Regular.otf", 400], ["CreatoDisplay-Medium.otf", 500], ["CreatoDisplay-Bold.otf", 700]];
+/** Dichiarazioni @font-face per Creato Display, solo se il brand indica dove sono i file (https). */
+export function fontFace(baseUrl?: string): string {
+  if (!baseUrl || !/^https?:\/\//.test(baseUrl)) return "";
+  const base = baseUrl.replace(/\/+$/, "");
+  const rules = FONT_FILES.map(([f, w]) => `@font-face{font-family:'Creato Display';src:url('${base}/${f}') format('opentype');font-weight:${w};font-style:normal;font-display:swap}`).join("");
+  return `<style>${rules}</style>`;
+}
+
 export function emailKeshi(o: EmailKeshiOpts, brand?: Partial<KeshiMailBrand>): string {
   const b = risolviBrand(brand);
   const interna = o.variant === "interna";
@@ -77,7 +87,7 @@ ${o.code.hint ? `<p style="margin:12px 0 0;font-size:13px;color:${MUTED};">${esc
   const footer = o.footer ?? (interna ? "Notifica interna Keshi." : "Comunicazione automatica relativa alla tua offerta.");
 
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
-<style>@media only screen and (max-width:620px){.k-wrap{padding:8px 0!important}.k-pad{padding-left:24px!important;padding-right:24px!important}.k-h1{font-size:27px!important}.k-code{font-size:36px!important;letter-spacing:.16em!important}}</style></head>
+${fontFace(b.fontBaseUrl)}<style>@media only screen and (max-width:620px){.k-wrap{padding:8px 0!important}.k-pad{padding-left:24px!important;padding-right:24px!important}.k-h1{font-size:27px!important}.k-code{font-size:36px!important;letter-spacing:.16em!important}}</style></head>
 <body style="margin:0;padding:0;background-color:${BG};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${BG};"><tr><td align="center" class="k-wrap" style="padding:16px 0;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="k-card" style="width:100%;max-width:640px;margin:0 auto;background-color:${BG};font-family:${SANS};color:${INK};">

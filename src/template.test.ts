@@ -188,3 +188,21 @@ test("brand personalizzato: logo, alt e riga legale (escapata)", () => {
   expect(html).not.toContain("keshi-logo.png");
   expect(html).not.toContain("Headformula");
 });
+
+describe("fontFace", () => {
+  it("senza fontBaseUrl non dichiara nessun @font-face", () => {
+    expect(fontFace(undefined)).toBe("");
+    expect(fontFace("ftp://x")).toBe("");
+    expect(emailKeshi({ heading: "T", intro: "i" })).not.toContain("@font-face");
+  });
+  it("con fontBaseUrl dichiara i quattro pesi di Creato Display senza doppio slash", () => {
+    const css = fontFace("https://esempio.app/fonts/");
+    expect(css.match(/@font-face/g)).toHaveLength(4);
+    expect(css).toContain("url('https://esempio.app/fonts/CreatoDisplay-Light.otf') format('opentype');font-weight:300");
+    expect(css).toContain("font-weight:700");
+    expect(css).not.toContain("fonts//");
+    const html = emailKeshi({ heading: "T", intro: "i" }, { fontBaseUrl: "https://esempio.app/fonts" });
+    expect(html.indexOf("@font-face")).toBeLessThan(html.indexOf("@media only screen"));
+  });
+});
+
