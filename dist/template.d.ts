@@ -22,4 +22,6 @@ export type EmailKeshiOpts = {
     footer?: string;
     variant?: "cliente" | "interna";
 };
+/** Dichiarazioni @font-face per Creato Display, solo se il brand indica dove sono i file (https). */
+export declare function fontFace(baseUrl?: string): string;
 export declare function emailKeshi(o: EmailKeshiOpts, brand?: Partial<KeshiMailBrand>): string;
